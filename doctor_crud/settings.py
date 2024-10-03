@@ -38,7 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'aplication.core.apps.CoreConfig',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
+
+#Comandos para instalar:
+
+# pip install crispy-bootstrap5
+# pip install django-crispy-forms
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
