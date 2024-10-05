@@ -23,6 +23,7 @@ def doctor_List(request):
 def doctor_create(request):
     data = {"title": "Doctores","title1": "Añadir Doctores"}
     if request.method == "POST":
+        print(request.POST)
         form = DoctorForm(request.POST)
         if form.is_valid():
             form.save()
@@ -36,3 +37,30 @@ def doctor_create(request):
         data["form"] = form
     print(form)
     return render(request, "core/doctor/form.html", data)
+
+def doctor_update(request,id):
+    data = {"title": "Doctores","title1": "Editar Doctor"}
+    doctor = Doctor.objects.get(pk=id)# doctor1
+    if request.method == "POST":
+        form = DoctorForm(request.POST,instance=doctor)
+        if form.is_valid():
+            form.save()
+            return redirect("core:doctor_list")
+        else:
+            data["form"] = form
+            data["error"] = "Error al editar el Doctor."
+            return render(request, "core/doctor/form.html", data)
+    else:
+        form = DoctorForm(instance=doctor)
+        data["form"] = form
+        print(form)
+    return render(request, "core/doctor/form.html", data)
+
+#@login_required
+def doctor_delete(request,id):
+    doctor = Doctor.objects.get(id=id)
+    data = {"title":"Eliminar","title1":"Eliminar Doctor","doctor":doctor}
+    if request.method == "POST":
+        doctor.delete()
+        return redirect("core:doctor_list")
+    return render(request, "core/doctor/delete.html", data)

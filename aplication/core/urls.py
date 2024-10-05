@@ -9,4 +9,6 @@ path('', views.home,name='home'),
 
 path('doctor_list/', views.doctor_List,name="doctor_list"),
 path('doctor_create/', views.doctor_create,name="doctor_create"),
+path('doctor_update/<int:id>/', views.doctor_update,name='doctor_update'),
+path('doctor_delete/<int:id>/', views.doctor_delete,name='doctor_delete'),
 ]
